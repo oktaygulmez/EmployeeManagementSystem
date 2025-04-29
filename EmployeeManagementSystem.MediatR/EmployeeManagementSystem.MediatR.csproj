@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\EmployeeManagementSystem.Data\EmployeeManagementSystem.Data.csproj" />
+    <ProjectReference Include="..\EmployeeManagementSystem.Common\EmployeeManagementSystem.Common.csproj" />
+    <ProjectReference Include="..\EmployeeManagementSystem.Domain\EmployeeManagementSystem.Domain.csproj" />
+    <ProjectReference Include="..\EmployeeManagementSystem.Helper\EmployeeManagementSystem.Helper.csproj" />
+    <ProjectReference Include="..\EmployeeManagementSystem.Repository\EmployeeManagementSystem.Repository.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MediatR" Version="11.0.0" />
+  </ItemGroup>
+
+</Project>
