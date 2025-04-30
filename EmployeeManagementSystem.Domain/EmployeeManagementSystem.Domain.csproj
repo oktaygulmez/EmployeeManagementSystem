@@ -22,6 +22,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\EmployeeManagementSystem.Data\EmployeeManagementSystem.Data.csproj" />
+    <ProjectReference Include="..\EmployeeManagementSystem.Helper\EmployeeManagementSystem.Helper.csproj" />
   </ItemGroup>
 
 </Project>

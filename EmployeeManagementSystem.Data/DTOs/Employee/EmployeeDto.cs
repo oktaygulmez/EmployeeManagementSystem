@@ -21,8 +21,8 @@ namespace EmployeeManagementSystem.Data.DTOs
 
         public string Adress { get; set; }
 
-        public Guid DepatmentId { get; set; }
-        public string DepatmentName { get; set; }
+        public Guid DepartmentId { get; set; }
+        public string DepartmentName { get; set; }
 
     }
 }

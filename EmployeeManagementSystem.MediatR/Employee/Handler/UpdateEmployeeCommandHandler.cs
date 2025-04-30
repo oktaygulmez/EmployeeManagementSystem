@@ -48,7 +48,7 @@ namespace EmployeeManagementSystem.MediatR.Employee.Handler
             existingEntity.EMail = request.EMail;
             existingEntity.Phone = request.Phone;
             existingEntity.Adress = request.Adress;
-            existingEntity.Department.Id = request.DepartmentId;
+            existingEntity.DepartmentId = request.DepartmentId;
 
             _employeeRepository.Update(existingEntity);
 

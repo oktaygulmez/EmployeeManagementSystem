@@ -44,8 +44,8 @@ namespace EmployeeManagementSystem.Domain.Migrations
                         new
                         {
                             Id = new Guid("f47c9f2e-e48b-4b5f-a897-9997ab0a7e4a"),
-                            EMail = "Yazılım",
-                            HashedPassword = "$2a$11$46jtcA9VHkgV0jNqyzC98OZ65PRNNZVf.n/8pcxo.ObnqI1z95MzW"
+                            EMail = "oktay@acerpro.com",
+                            HashedPassword = "$2a$11$dGw/NbhJeg/XPqBuFU0NE.uUuwcG/nKF6P/RpJoqZsGUF7Q5IARue"
                         });
                 });
 

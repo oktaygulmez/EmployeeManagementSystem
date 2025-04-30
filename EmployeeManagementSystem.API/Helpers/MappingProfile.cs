@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using EmployeeManagementSystem.Data.DTOs;
+using EmployeeManagementSystem.Data.DTOs.AdminUser;
 using EmployeeManagementSystem.Data.Entities;
 using EmployeeManagementSystem.MediatR.Department.Command;
 using EmployeeManagementSystem.MediatR.Employee.Command;
@@ -10,6 +11,9 @@ namespace EmployeeManagementSystem.API.Helpers
     {
         public MappingProfile()
         {
+            CreateMap<AdminUser, AdminUserDto>();
+            CreateMap<AdminUserDto, AdminUser>();
+
             CreateMap<CreateEmployeeCommand, Employee>();
             CreateMap<UpdateEmployeeCommand, Employee>();
             CreateMap<Employee, EmployeeDto>();

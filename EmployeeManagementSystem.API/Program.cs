@@ -13,6 +13,7 @@ using Serilog.Events;
 using Serilog.Sinks.MSSqlServer;
 using Microsoft.Extensions.Hosting;
 using DepartmentManagementSystem.Repository;
+using EmployeeManagementSystem.Helper;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,7 +22,7 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 
 //Default user tanýmladým, ilk baþta bu gerekli, oturum açma iþlemleri tamamlandýðýnda kaldýrýlabilir
 var defaultUserId = builder.Configuration["DefaultUser:DefaultUserId"];
-builder.Services.AddScoped(c => new AdminUser() { Id = defaultUserId });
+builder.Services.AddScoped(c => new AdminUserDto() { Id = defaultUserId });
 
 // DbContext'i ekle
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
@@ -37,6 +38,7 @@ builder.Services.AddMediatR(cfg =>
 
 // Repository ve diðer servisler
 builder.Services.AddScoped(typeof(IUnitOfWork<>), typeof(UnitOfWork<>));
+builder.Services.AddScoped<IAdminUserRepository, AdminUserRepository>();
 builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
 builder.Services.AddScoped<IDepartmentRepository, DepartmentRepository>();
 
@@ -71,12 +73,12 @@ builder.Services.AddSwaggerGen();
 
 // Serilog yapýlandýrmasý
 Serilog.Log.Logger = new LoggerConfiguration()
-    .Enrich.FromLogContext()  // Loglarýnýzda her context bilgisini (örneðin kullanýcý bilgisi) ekler
-    .WriteTo.Console()  // Konsola log yazma
+    .Enrich.FromLogContext() 
+    .WriteTo.Console() 
     .WriteTo.MSSqlServer(
         connectionString: connectionString,
         sinkOptions: new MSSqlServerSinkOptions { TableName = "Logs", AutoCreateSqlTable = true },
-        restrictedToMinimumLevel: Serilog.Events.LogEventLevel.Information)  // MSSQL'e log yazma
+        restrictedToMinimumLevel: Serilog.Events.LogEventLevel.Information) 
     .CreateLogger();
 
 // Serilog'u kullanmaya baþla
@@ -85,7 +87,33 @@ builder.Host.UseSerilog();
 // AutoMapper
 builder.Services.AddAutoMapper(typeof(MappingProfile));
 
+
+
+
+
+// CORS politikasý tanýmla
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAngularApp",
+        policy =>
+        {
+            policy.WithOrigins("http://localhost:4200")
+                  .AllowAnyHeader()
+                  .AllowAnyMethod();
+        });
+});
+
+
+
+
+
+
 var app = builder.Build();
+
+
+// CORS'u middleware olarak ekle
+app.UseCors("AllowAngularApp");
+
 
 // Middleware Serilog için eklendi
 app.UseSerilogRequestLogging();

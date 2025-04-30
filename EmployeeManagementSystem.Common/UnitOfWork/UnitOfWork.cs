@@ -13,11 +13,11 @@ namespace EmployeeManagementSystem.Common.UnitOfWork
     {
         private readonly TContext _context;
         private readonly ILogger<UnitOfWork<TContext>> _logger;
-        private readonly Data.DTOs.AdminUser.AdminUser _userInfoToken;
+        private readonly Data.DTOs.AdminUser.AdminUserDto _userInfoToken;
         public UnitOfWork(
             TContext context,
             ILogger<UnitOfWork<TContext>> logger,
-            Data.DTOs.AdminUser.AdminUser userInfoToken)
+            Data.DTOs.AdminUser.AdminUserDto userInfoToken)
         {
             _context = context;
             _logger = logger;

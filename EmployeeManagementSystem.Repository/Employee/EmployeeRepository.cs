@@ -23,7 +23,7 @@ namespace EmployeeManagementSystem.Repository
 
         public async Task<List<EmployeeDto>> GetEmployeeAll()
         {
-            var employees = await _context.Employees.Where(x => x.IsDeleted == false)
+            var employees = await _context.Employees.Where(x => x.IsDeleted == false && x.Department.IsDeleted == false)
          .Select(e => new EmployeeDto
          {
              Id = e.Id,
@@ -32,7 +32,8 @@ namespace EmployeeManagementSystem.Repository
              EMail = e.EMail,
              Phone = e.Phone,
              Adress = e.Adress,
-             DepatmentName = e.Department.DepartmentName
+             DepartmentId = e.DepartmentId,
+             DepartmentName = e.Department.DepartmentName
          })
          .ToListAsync();
 
@@ -41,7 +42,7 @@ namespace EmployeeManagementSystem.Repository
 
         public async Task<EmployeeDto> GetEmployeeById(Guid id)
         {
-            var employee = await _context.Employees.Where(x => x.IsDeleted == false)
+            var employee = await _context.Employees.Where(x => x.IsDeleted == false && x.Department.IsDeleted ==false)
         .Where(e => e.Id == id)
         .Select(e => new EmployeeDto
         {
@@ -51,7 +52,8 @@ namespace EmployeeManagementSystem.Repository
             EMail = e.EMail,
             Phone = e.Phone,
             Adress = e.Adress,
-            DepatmentName = e.Department.DepartmentName
+            DepartmentId = e.DepartmentId,
+            DepartmentName = e.Department.DepartmentName
         })
         .FirstOrDefaultAsync();
 

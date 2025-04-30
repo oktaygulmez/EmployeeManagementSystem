@@ -1,0 +1,49 @@
+
+<div class="background-container" style="background-color: #f3f3f4; width: 100%; height: 1000px;">
+  <div class="middle-box text-center loginscreen animated fadeInDown">
+    <div class="mt-5">
+      <div>
+        <!--<h1 class="logo-name">E4</h1>-->
+        <img src="assets/images/logo.png" style="max-width:250px; max-height:150px;" class="pt-5 pb-3">
+      </div>
+
+      <h3 class="mt-5 mb-5">Çalışan Yönetim Sistemi</h3>
+
+      <form class="m-t" role="form" (ngSubmit)="onLogin()">
+
+        <div class="example-container">
+
+          <mat-form-field appearance="outline">
+            <mat-label>Kullanıcı Adı</mat-label>
+            <input matInput placeholder="Kullanıcı Adı" id="userName" [(ngModel)]="userName" name="userName">
+            <mat-icon matSuffix>account_circle</mat-icon>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Şifre</mat-label>
+            <input matInput [type]="hide ? 'password' : 'text'" id="password" placeholder="Şifre" [(ngModel)]="password" name="password">
+            <button type="button" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+              <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+          </mat-form-field>
+
+          <section class="example-section">
+            <span class="example-list-section">
+              <mat-checkbox class="example-margin" color="primary" [(ngModel)]="rememberMe" name="rememberMe">
+                <mat-label> Beni Hatırla</mat-label>
+              </mat-checkbox>
+              <!--<a class="ml-4" routerLink="/ResetPassword"><u><strong>Şifremi Unuttum</strong></u></a>-->
+
+            </span>
+          </section>
+
+          <button type="submit" class="btn btn-e4 block full-width m-b mt-3" style="height:40px;">Giriş Yap</button>
+
+        </div>
+
+       
+
+      </form>
+    </div>
+  </div>
+</div>

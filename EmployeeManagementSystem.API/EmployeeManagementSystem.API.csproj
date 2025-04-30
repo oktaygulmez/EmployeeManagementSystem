@@ -38,7 +38,6 @@
     </ProjectReference>
     <ProjectReference Include="..\EmployeeManagementSystem.Common\EmployeeManagementSystem.Common.csproj" />
     <ProjectReference Include="..\EmployeeManagementSystem.Domain\EmployeeManagementSystem.Domain.csproj" />
-    <ProjectReference Include="..\EmployeeManagementSystem.Helper\EmployeeManagementSystem.Helper.csproj" />
     <ProjectReference Include="..\employeemanagementsystem.MediatR\EmployeeManagementSystem.MediatR.csproj" />
   </ItemGroup>
 

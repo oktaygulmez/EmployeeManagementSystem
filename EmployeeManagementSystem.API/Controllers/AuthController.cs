@@ -6,6 +6,13 @@ using System.Security.Claims;
 using System.Text;
 using Swashbuckle.AspNetCore;
 using EmployeeManagementSystem.Data.Entities;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
+using EmployeeManagementSystem.MediatR.AdminUser.Handler;
+using EmployeeManagementSystem.MediatR.AdminUser.Command;
+using MediatR;
+using Microsoft.AspNetCore.Components.Forms;
+using EmployeeManagementSystem.Data.DTOs.AdminUser;
+using EmployeeManagementSystem.Helper;
 
 namespace EmployeeManagementSystem.API.Controllers
 {
@@ -15,19 +22,21 @@ namespace EmployeeManagementSystem.API.Controllers
     {
         private readonly IConfiguration _configuration;
         private readonly ILogger<AuthController> _logger;
+        private readonly IMediator _mediator;
 
         private static Dictionary<string, (int count, DateTime? lockoutEnd)> loginAttempts = new();
-        public AuthController(IConfiguration configuration, ILogger<AuthController> logger)
+        public AuthController(IConfiguration configuration, ILogger<AuthController> logger, IMediator mediator)
         {
             _configuration = configuration;
             _logger = logger;
+            _mediator = mediator;
         }
 
         /// <summary>
         /// Login açıklama metni
         /// </summary>
         [HttpPost("login")]
-        public IActionResult Login([FromBody] AdminUser login)
+        public async Task<IActionResult> Login([FromBody] AdminLoginDto login)
         {
             var username = login.EMail;
             var ipAddress = HttpContext.Connection.RemoteIpAddress?.ToString();
@@ -43,8 +52,18 @@ namespace EmployeeManagementSystem.API.Controllers
                 }
             }
 
+
+            var user = await  _mediator.Send(new GetAdminUserQuery { Email = login.EMail });
+
+            if (user == null)
+            {
+                return Unauthorized("Kullanıcı bulunamadı.");
+            }
+
+            bool isPasswordValid = PasswordHelper.VerifyPassword(login.Password, user.HashedPassword);
+
             // Kullanıcı doğrulama
-            if (username == "test" && login.Password == "password")
+            if (isPasswordValid)
             {
                 // Başarılı giriş -> denemeleri temizle
                 if (loginAttempts.ContainsKey(username))
