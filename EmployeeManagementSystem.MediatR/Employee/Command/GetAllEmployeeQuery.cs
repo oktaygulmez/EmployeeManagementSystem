@@ -1,4 +1,4 @@
-﻿using EmployeeManagementSystem.Helper;
+﻿using EmployeeManagementSystem.Data.DTOs;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -8,8 +8,7 @@ using System.Threading.Tasks;
 
 namespace EmployeeManagementSystem.MediatR.Employee.Command
 {
-    public class DeleteEmployeeCommand : IRequest<ServiceResponse<bool>>
+    public class GetAllEmployeeQuery : IRequest<List<EmployeeDto>>
     {
-        public Guid Id { get; set; }
     }
 }

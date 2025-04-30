@@ -9,8 +9,6 @@ namespace EmployeeManagementSystem.Data.Entities
     public class Department : BaseEntity
     {
         public Guid Id { get; set; }
-        public string DepatmentName { get; set; }
-
-        public ICollection<Employee> Employees { get; set; }
+        public string DepartmentName { get; set; }
     }
 }

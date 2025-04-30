@@ -1,4 +1,6 @@
-﻿using MediatR;
+﻿using EmployeeManagementSystem.Data.DTOs;
+using EmployeeManagementSystem.Helper;
+using MediatR;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace EmployeeManagementSystem.MediatR.Employee.Command
 {
-    public class UpdateEmployeeCommand : IRequest
+    public class UpdateEmployeeCommand : IRequest<ServiceResponse<EmployeeDto>>
     {
         public Guid Id { get; set; }
 

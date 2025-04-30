@@ -9,6 +9,6 @@ namespace EmployeeManagementSystem.Data.DTOs
     public  class DepartmentDto
     {
         public Guid Id { get; set; }
-        public string DepatmentName { get; set; }
+        public string DepartmentName { get; set; }
     }
 }

@@ -12,7 +12,6 @@ namespace EmployeeManagementSystem.Domain
         public DbSet<AdminUser> AdminUsers { get; set; }
         public DbSet<Employee> Employees { get; set; }
         public DbSet<Department> Departments { get; set; }
-        public DbSet<Log> Logs { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -23,15 +22,9 @@ namespace EmployeeManagementSystem.Domain
                 .HasKey(d => d.Id); // Id primary key
 
             modelBuilder.Entity<Department>()
-                .Property(d => d.DepatmentName)
+                .Property(d => d.DepartmentName)
                 .IsRequired()
                 .HasMaxLength(100); // Set maximum length for DepartmentName
-
-            modelBuilder.Entity<Department>()
-                .HasMany(d => d.Employees) // One-to-many relationship with Employee
-                .WithOne(e => e.Department) // Employee has one Department
-                .HasForeignKey(e => e.DepartmentId) // Foreign key in Employee
-                .OnDelete(DeleteBehavior.NoAction); // Avoid cascade delete
 
             // Employee entity
             modelBuilder.Entity<Employee>()
@@ -62,24 +55,10 @@ namespace EmployeeManagementSystem.Domain
 
             modelBuilder.Entity<Employee>()
                 .HasOne(e => e.Department) // Each Employee has one Department
-                .WithMany(d => d.Employees) // One Department can have many Employees
+                .WithMany() // One Department can have many Employees
                 .HasForeignKey(e => e.DepartmentId) // Foreign key in Employee
                 .OnDelete(DeleteBehavior.NoAction); // Avoid cascade delete
 
-
-
-        modelBuilder.Entity<Log>(entity =>
-            {
-                entity.ToTable("Logs");
-
-                entity.Property(e => e.Message).HasColumnType("nvarchar(max)");
-                entity.Property(e => e.MessageTemplate).HasColumnType("nvarchar(max)");
-                entity.Property(e => e.Level).HasMaxLength(128);
-                entity.Property(e => e.TimeStamp).HasColumnType("datetimeoffset");
-                entity.Property(e => e.Exception).HasColumnType("nvarchar(max)");
-                entity.Property(e => e.Properties).HasColumnType("nvarchar(max)");
-                entity.Property(e => e.LogEvent).HasColumnType("nvarchar(max)");
-            });
 
             // Seed data
             var AdminUserId = Guid.Parse("f47c9f2e-e48b-4b5f-a897-9997ab0a7e4a");
@@ -97,7 +76,7 @@ namespace EmployeeManagementSystem.Domain
             modelBuilder.Entity<Department>().HasData(new Department
             {
                 Id = departmentId,
-                DepatmentName = "Yazılım",
+                DepartmentName = "Yazılım",
                 CreatedDate = seedDate,
                 CreatedBy = AdminUserId,
                 ModifiedDate = seedDate,

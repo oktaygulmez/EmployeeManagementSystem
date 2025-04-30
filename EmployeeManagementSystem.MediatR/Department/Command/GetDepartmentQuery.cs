@@ -1,4 +1,4 @@
-﻿using EmployeeManagementSystem.Helper;
+﻿using EmployeeManagementSystem.Data.DTOs;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -6,9 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EmployeeManagementSystem.MediatR.Employee.Command
+namespace EmployeeManagementSystem.MediatR.Department.Command
 {
-    public class DeleteEmployeeCommand : IRequest<ServiceResponse<bool>>
+    public class GetDepartmentQuery : IRequest<DepartmentDto>
     {
         public Guid Id { get; set; }
     }

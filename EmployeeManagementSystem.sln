@@ -3,10 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.10.35122.118
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EmployeeManagementSystem.API", "EmployeeManagementSystem.Server\EmployeeManagementSystem.API.csproj", "{CED5A77C-E566-41C7-8619-42D031C683C3}"
-EndProject
-Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "EmployeeManagementSystem.UI", "employeemanagementsystem.client\EmployeeManagementSystem.UI.esproj", "{27B4C505-1AF1-4729-87C0-E89E08002F93}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EmployeeManagementSystem.Domain", "EmployeeManagementSystem.Domain\EmployeeManagementSystem.Domain.csproj", "{107340F9-D7CB-49A7-8CC7-3DD9A0CA31BF}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EmployeeManagementSystem.MediatR", "employeemanagementsystem.MediatR\EmployeeManagementSystem.MediatR.csproj", "{BBC890C2-C3D1-45C6-A4EA-9AC7D1B968C1}"
@@ -17,7 +13,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EmployeeManagementSystem.Co
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EmployeeManagementSystem.Helper", "EmployeeManagementSystem.Helper\EmployeeManagementSystem.Helper.csproj", "{59D2E775-E8B2-452F-885B-CFAC4BB47E79}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmployeeManagementSystem.Data", "EmployeeManagementSystem.Data\EmployeeManagementSystem.Data.csproj", "{D42681F5-1020-4DE4-B7F0-9D93FFEF029A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EmployeeManagementSystem.Data", "EmployeeManagementSystem.Data\EmployeeManagementSystem.Data.csproj", "{D42681F5-1020-4DE4-B7F0-9D93FFEF029A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EmployeeManagementSystem.API", "EmployeeManagementSystem.API\EmployeeManagementSystem.API.csproj", "{E4361B32-36C6-4ADA-B325-49CF31123A2F}"
+EndProject
+Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "EmployeeManagementSystem.UI", "EmployeeManagementSystem.UI\EmployeeManagementSystem.UI.esproj", "{4A472A2F-0578-4B41-B2CA-34090A322D69}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,16 +25,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{CED5A77C-E566-41C7-8619-42D031C683C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CED5A77C-E566-41C7-8619-42D031C683C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CED5A77C-E566-41C7-8619-42D031C683C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CED5A77C-E566-41C7-8619-42D031C683C3}.Release|Any CPU.Build.0 = Release|Any CPU
-		{27B4C505-1AF1-4729-87C0-E89E08002F93}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{27B4C505-1AF1-4729-87C0-E89E08002F93}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{27B4C505-1AF1-4729-87C0-E89E08002F93}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
-		{27B4C505-1AF1-4729-87C0-E89E08002F93}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{27B4C505-1AF1-4729-87C0-E89E08002F93}.Release|Any CPU.Build.0 = Release|Any CPU
-		{27B4C505-1AF1-4729-87C0-E89E08002F93}.Release|Any CPU.Deploy.0 = Release|Any CPU
 		{107340F9-D7CB-49A7-8CC7-3DD9A0CA31BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{107340F9-D7CB-49A7-8CC7-3DD9A0CA31BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{107340F9-D7CB-49A7-8CC7-3DD9A0CA31BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -59,6 +49,16 @@ Global
 		{D42681F5-1020-4DE4-B7F0-9D93FFEF029A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D42681F5-1020-4DE4-B7F0-9D93FFEF029A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D42681F5-1020-4DE4-B7F0-9D93FFEF029A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E4361B32-36C6-4ADA-B325-49CF31123A2F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E4361B32-36C6-4ADA-B325-49CF31123A2F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E4361B32-36C6-4ADA-B325-49CF31123A2F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E4361B32-36C6-4ADA-B325-49CF31123A2F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4A472A2F-0578-4B41-B2CA-34090A322D69}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4A472A2F-0578-4B41-B2CA-34090A322D69}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4A472A2F-0578-4B41-B2CA-34090A322D69}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{4A472A2F-0578-4B41-B2CA-34090A322D69}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4A472A2F-0578-4B41-B2CA-34090A322D69}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4A472A2F-0578-4B41-B2CA-34090A322D69}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

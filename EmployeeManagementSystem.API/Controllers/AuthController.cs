@@ -23,6 +23,9 @@ namespace EmployeeManagementSystem.API.Controllers
             _logger = logger;
         }
 
+        /// <summary>
+        /// Login açıklama metni
+        /// </summary>
         [HttpPost("login")]
         public IActionResult Login([FromBody] AdminUser login)
         {

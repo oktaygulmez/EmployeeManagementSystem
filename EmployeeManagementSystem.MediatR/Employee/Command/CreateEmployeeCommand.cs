@@ -5,10 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MediatR;
+using EmployeeManagementSystem.Data.DTOs;
+using EmployeeManagementSystem.Helper;
 
 namespace EmployeeManagementSystem.MediatR.Employee.Command
 {
-    public class CreateEmployeeCommand : IRequest
+    public class CreateEmployeeCommand : IRequest<ServiceResponse<EmployeeDto>>
     {
         public string Name { get; set; }
 

@@ -17,6 +17,11 @@ namespace EmployeeManagementSystem.Data.DTOs
 
         public string EMail { get; set; }
 
+        public string Phone { get; set; }
+
+        public string Adress { get; set; }
+
+        public Guid DepatmentId { get; set; }
         public string DepatmentName { get; set; }
 
     }

@@ -6,10 +6,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EmployeeManagementSystem.MediatR.Employee.Command
+namespace EmployeeManagementSystem.MediatR.Department.Command
 {
-    public class DeleteEmployeeCommand : IRequest<ServiceResponse<bool>>
+    public class DeleteDepartmentCommand : IRequest<ServiceResponse<bool>>
     {
         public Guid Id { get; set; }
     }
 }
+

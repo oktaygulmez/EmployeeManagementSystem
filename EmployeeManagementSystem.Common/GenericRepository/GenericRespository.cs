@@ -1,52 +1,54 @@
-﻿
-
-using Microsoft.EntityFrameworkCore;
-using EmployeeManagementSystem.Domain;
-using System.Collections.Generic;
+﻿using Microsoft.EntityFrameworkCore;
+using EmployeeManagementSystem.Common.UnitOfWork;
+using EmployeeManagementSystem.Data.Entities;
 
 namespace EmployeeManagementSystem.Common.GenericRepository
 {
-    public class GenericRepository<T> : IGenericRepository<T> where T : class
+    public class GenericRepository<TC, TContext> : IGenericRepository<TC>
+        where TC : class 
+        where TContext : DbContext
     {
-        protected readonly ApplicationDbContext _context;
-        private readonly DbSet<T> _dbSet;
-
-        public GenericRepository(ApplicationDbContext context)
+        protected readonly TContext _context;
+        private readonly DbSet<TC> _dbSet;
+        protected IUnitOfWork<TContext> _uow;
+        public GenericRepository(IUnitOfWork<TContext> uow)
         {
-            _context = context;
-            _dbSet = _context.Set<T>(); // DbContext'e dinamik olarak Entity tipi ile erişim
+            _context = uow.Context;
+            this._uow = uow;
+            _dbSet = _context.Set<TC>();
         }
 
-        public async Task AddAsync(T entity)
-        {
-            await _dbSet.AddAsync(entity);
-            await _context.SaveChangesAsync();
-        }
+        public IQueryable<TC> All => _context.Set<TC>();
 
-        public async Task DeleteAsync(Guid id)
-        {
-            var entity = await _dbSet.FindAsync(id);
-            if (entity != null)
-            {
-                _dbSet.Remove(entity);
-                await _context.SaveChangesAsync();
-            }
-        }
-
-        public async Task<IEnumerable<T>> GetAllAsync()
+        public async Task<IEnumerable<TC>> GetAllAsync()
         {
             return await _dbSet.ToListAsync();
         }
 
-        public async Task<T> GetByIdAsync(Guid id)
+        public async Task<TC> GetByIdAsync(Guid id)
         {
             return await _dbSet.FindAsync(id);
         }
 
-        public async Task UpdateAsync(T entity)
+        public virtual void Add(TC entity)
         {
-            _dbSet.Update(entity);
-            await _context.SaveChangesAsync();
+             _context.AddAsync(entity);
         }
+
+        public virtual void Update(TC entity)
+        {
+            _context.Update(entity);
+        }
+
+        public virtual void Delete(TC entityData)
+        {
+            var entity = entityData as BaseEntity;
+            if (entity != null)
+            {
+                entity.IsDeleted = true;
+                _context.Update(entity);
+            }
+        }
+
     }
 }
