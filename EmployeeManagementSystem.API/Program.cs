@@ -100,14 +100,11 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 
-
-
 // Serilog'u kullanmaya başla
 builder.Host.UseSerilog();
 
 // AutoMapper
 builder.Services.AddAutoMapper(typeof(MappingProfile));
-
 
 // CORS politikası tanımla
 builder.Services.AddCors(options =>
@@ -120,7 +117,6 @@ builder.Services.AddCors(options =>
                   .AllowAnyMethod();
         });
 });
-
 
 var app = builder.Build();
 
@@ -146,7 +142,6 @@ Serilog.Log.Logger = new LoggerConfiguration()
         sinkOptions: new MSSqlServerSinkOptions { TableName = "Logs", AutoCreateSqlTable = true },
         restrictedToMinimumLevel: Serilog.Events.LogEventLevel.Information)
     .CreateLogger();
-
 
 app.UseDefaultFiles();
 app.UseStaticFiles();

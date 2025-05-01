@@ -1,16 +1,10 @@
-﻿using EmployeeManagementSystem;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-using Swashbuckle.AspNetCore;
-using EmployeeManagementSystem.Data.Entities;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
-using EmployeeManagementSystem.MediatR.AdminUser.Handler;
 using EmployeeManagementSystem.MediatR.AdminUser.Command;
 using MediatR;
-using Microsoft.AspNetCore.Components.Forms;
 using EmployeeManagementSystem.Data.DTOs.AdminUser;
 using EmployeeManagementSystem.Helper;
 
@@ -32,9 +26,6 @@ namespace EmployeeManagementSystem.API.Controllers
             _mediator = mediator;
         }
 
-        /// <summary>
-        /// Login açıklama metni
-        /// </summary>
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] AdminLoginDto login)
         {
@@ -52,7 +43,6 @@ namespace EmployeeManagementSystem.API.Controllers
                 }
             }
 
-
             var user = await  _mediator.Send(new GetAdminUserQuery { Email = login.EMail });
 
             if (user == null)
@@ -65,7 +55,7 @@ namespace EmployeeManagementSystem.API.Controllers
             // Kullanıcı doğrulama
             if (isPasswordValid)
             {
-                // Başarılı giriş -> denemeleri temizle
+                // Başarılı giriş - denemeleri temizle
                 if (loginAttempts.ContainsKey(username))
                     loginAttempts.Remove(username);
 
