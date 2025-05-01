@@ -92,11 +92,31 @@ namespace EmployeeManagementSystem.Domain.Migrations
                         {
                             Id = new Guid("2a17a3a7-c0c5-46ab-b84a-9db273383b36"),
                             CreatedBy = new Guid("f47c9f2e-e48b-4b5f-a897-9997ab0a7e4a"),
-                            CreatedDate = new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedDate = new DateTime(2025, 5, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DepartmentName = "Yazılım",
                             IsDeleted = false,
                             ModifiedBy = new Guid("f47c9f2e-e48b-4b5f-a897-9997ab0a7e4a"),
-                            ModifiedDate = new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            ModifiedDate = new DateTime(2025, 5, 2, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = new Guid("2a17a3a7-c0c5-46ab-b84a-9db273383b32"),
+                            CreatedBy = new Guid("f47c9f2e-e48b-4b5f-a897-9997ab0a7e4a"),
+                            CreatedDate = new DateTime(2025, 5, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DepartmentName = "İnsan Kaynakları",
+                            IsDeleted = false,
+                            ModifiedBy = new Guid("f47c9f2e-e48b-4b5f-a897-9997ab0a7e4a"),
+                            ModifiedDate = new DateTime(2025, 5, 2, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = new Guid("2a17a3a7-c0c5-46ab-b84a-9db273383b33"),
+                            CreatedBy = new Guid("f47c9f2e-e48b-4b5f-a897-9997ab0a7e4a"),
+                            CreatedDate = new DateTime(2025, 5, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DepartmentName = "Muhasebe",
+                            IsDeleted = false,
+                            ModifiedBy = new Guid("f47c9f2e-e48b-4b5f-a897-9997ab0a7e4a"),
+                            ModifiedDate = new DateTime(2025, 5, 2, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         });
                 });
 
@@ -167,15 +187,75 @@ namespace EmployeeManagementSystem.Domain.Migrations
                         new
                         {
                             Id = new Guid("46dcdc1c-cc52-478d-b88a-684c01c3ac26"),
-                            Adress = "Esenler İstanbul",
+                            Adress = "Bağcılar İstanbul",
                             CreatedBy = new Guid("f47c9f2e-e48b-4b5f-a897-9997ab0a7e4a"),
-                            CreatedDate = new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedDate = new DateTime(2025, 5, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DepartmentId = new Guid("2a17a3a7-c0c5-46ab-b84a-9db273383b36"),
                             EMail = "admin@acerpro.com",
                             IsDeleted = false,
                             ModifiedBy = new Guid("f47c9f2e-e48b-4b5f-a897-9997ab0a7e4a"),
-                            ModifiedDate = new DateTime(2023, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ModifiedDate = new DateTime(2025, 5, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Oktay",
+                            Phone = "0530 123 45 69",
+                            SurName = "Gülmez"
+                        },
+                        new
+                        {
+                            Id = new Guid("46dcdc1c-cc52-478d-b88a-684c01c3ac25"),
+                            Adress = "Esenler İstanbul",
+                            CreatedBy = new Guid("f47c9f2e-e48b-4b5f-a897-9997ab0a7e4a"),
+                            CreatedDate = new DateTime(2025, 5, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DepartmentId = new Guid("2a17a3a7-c0c5-46ab-b84a-9db273383b36"),
+                            EMail = "aytul@acerpro.com",
+                            IsDeleted = false,
+                            ModifiedBy = new Guid("f47c9f2e-e48b-4b5f-a897-9997ab0a7e4a"),
+                            ModifiedDate = new DateTime(2025, 5, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Aytül",
+                            Phone = "0530 123 45 69",
+                            SurName = "Peker"
+                        },
+                        new
+                        {
+                            Id = new Guid("46dcdc1c-cc52-478d-b88a-684c01c3ac24"),
+                            Adress = "Esenler İstanbul",
+                            CreatedBy = new Guid("f47c9f2e-e48b-4b5f-a897-9997ab0a7e4a"),
+                            CreatedDate = new DateTime(2025, 5, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DepartmentId = new Guid("2a17a3a7-c0c5-46ab-b84a-9db273383b32"),
+                            EMail = "ilknur@acerpro.com",
+                            IsDeleted = false,
+                            ModifiedBy = new Guid("f47c9f2e-e48b-4b5f-a897-9997ab0a7e4a"),
+                            ModifiedDate = new DateTime(2025, 5, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "İlknur",
+                            Phone = "0530 123 45 69",
+                            SurName = "Acer"
+                        },
+                        new
+                        {
+                            Id = new Guid("46dcdc1c-cc52-478d-b88a-684c01c3ac23"),
+                            Adress = "Bağcılar İstanbul",
+                            CreatedBy = new Guid("f47c9f2e-e48b-4b5f-a897-9997ab0a7e4a"),
+                            CreatedDate = new DateTime(2025, 5, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DepartmentId = new Guid("2a17a3a7-c0c5-46ab-b84a-9db273383b36"),
+                            EMail = "admin@acerpro.com",
+                            IsDeleted = false,
+                            ModifiedBy = new Guid("f47c9f2e-e48b-4b5f-a897-9997ab0a7e4a"),
+                            ModifiedDate = new DateTime(2025, 5, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Berkay",
+                            Phone = "0530 123 45 69",
+                            SurName = "Gülmez"
+                        },
+                        new
+                        {
+                            Id = new Guid("46dcdc1c-cc52-478d-b88a-684c01c3ac22"),
+                            Adress = "Bağcılar İstanbul",
+                            CreatedBy = new Guid("f47c9f2e-e48b-4b5f-a897-9997ab0a7e4a"),
+                            CreatedDate = new DateTime(2025, 5, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DepartmentId = new Guid("2a17a3a7-c0c5-46ab-b84a-9db273383b33"),
+                            EMail = "perihan@acerpro.com",
+                            IsDeleted = false,
+                            ModifiedBy = new Guid("f47c9f2e-e48b-4b5f-a897-9997ab0a7e4a"),
+                            ModifiedDate = new DateTime(2025, 5, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Perihan",
                             Phone = "0530 123 45 69",
                             SurName = "Gülmez"
                         });

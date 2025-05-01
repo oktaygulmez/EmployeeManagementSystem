@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Authentication.JwtBearer;
+ï»¿using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.EntityFrameworkCore;
@@ -9,40 +9,43 @@ using EmployeeManagementSystem.API.Helpers;
 using EmployeeManagementSystem.Common.UnitOfWork;
 using EmployeeManagementSystem.Data.DTOs.AdminUser;
 using Serilog;
-using Serilog.Events;
 using Serilog.Sinks.MSSqlServer;
-using Microsoft.Extensions.Hosting;
 using DepartmentManagementSystem.Repository;
-using EmployeeManagementSystem.Helper;
+using FluentValidation;
+using EmployeeManagementSystem.MediatR.PipeLineBehavior;
+using MediatR;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Connection string'i al
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-
-//Default user tanýmladým, ilk baþta bu gerekli, oturum açma iþlemleri tamamlandýðýnda kaldýrýlabilir
+//Default user tanÄ±mladÄ±m, ilk baÅŸta bu gerekli, oturum aÃ§ma iÅŸlemleri tamamlandÄ±ÄŸÄ±nda kaldÄ±rÄ±labilir
 var defaultUserId = builder.Configuration["DefaultUser:DefaultUserId"];
 builder.Services.AddScoped(c => new AdminUserDto() { Id = defaultUserId });
+
+// Connection string'i al
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
 // DbContext'i ekle
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
 
-// MediatR yapýlandýrmasý
+// MediatR yapÄ±lanmasÄ±
 var assembly = AppDomain.CurrentDomain.Load("EmployeeManagementSystem.MediatR");
-
 builder.Services.AddMediatR(cfg =>
 {
     cfg.RegisterServicesFromAssemblies(assembly);
 });
 
-// Repository ve diðer servisler
+//Validation ayarlarÄ± - Burda DependencyInjection'dan yararlanarak tÃ¼m validasyon kurallarÄ±nÄ± tek bir yerden yÃ¶netebiliyorum. her biri iÃ§in ayrÄ± ayrÄ± ayar yapmamÄ±za gerek kalmÄ±yor
+builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
+builder.Services.AddValidatorsFromAssemblies(Enumerable.Repeat(assembly, 1));
+
+// Repository ve diÄŸer servisler
 builder.Services.AddScoped(typeof(IUnitOfWork<>), typeof(UnitOfWork<>));
 builder.Services.AddScoped<IAdminUserRepository, AdminUserRepository>();
 builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
 builder.Services.AddScoped<IDepartmentRepository, DepartmentRepository>();
 
-// JWT Bearer Token Kodlarý
+// JWT Bearer Token KodlarÄ±
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
@@ -58,72 +61,92 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         };
     });
 
-//Controller'larda yazdýðýmýz açýklama metninin swaggerda gözükmesini saðlayan kod parçasý
+//Controller'larda yazdÄ±ÄŸÄ±mÄ±z aÃ§Ä±klama metninin swaggerda gÃ¶zÃ¼kmesini saÄŸlayan kod parÃ§asÄ±
 builder.Services.AddSwaggerGen(c =>
 {
     var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
     c.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
+
+    c.SwaggerDoc("v1", new() { Title = "Your API", Version = "v1" });
+    // ðŸ” Bearer Token ayarlarÄ±
+    c.AddSecurityDefinition("Bearer", new Microsoft.OpenApi.Models.OpenApiSecurityScheme
+    {
+        Name = "Authorization",
+        Type = Microsoft.OpenApi.Models.SecuritySchemeType.ApiKey,
+        Scheme = "Bearer",
+        BearerFormat = "JWT",
+        In = Microsoft.OpenApi.Models.ParameterLocation.Header,
+        Description = "JWT Authorization header using the Bearer scheme. Example: 'Bearer 12345abcdef'"
+    });
+
+    c.AddSecurityRequirement(new Microsoft.OpenApi.Models.OpenApiSecurityRequirement
+    {
+        {
+            new Microsoft.OpenApi.Models.OpenApiSecurityScheme
+            {
+                Reference = new Microsoft.OpenApi.Models.OpenApiReference
+                {
+                    Type = Microsoft.OpenApi.Models.ReferenceType.SecurityScheme,
+                    Id = "Bearer"
+                }
+            },
+            new string[] {}
+        }
+    });
 });
 
 // Add services to the container.
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
 
-// Serilog yapýlandýrmasý
-Serilog.Log.Logger = new LoggerConfiguration()
-    .Enrich.FromLogContext() 
-    .WriteTo.Console() 
-    .WriteTo.MSSqlServer(
-        connectionString: connectionString,
-        sinkOptions: new MSSqlServerSinkOptions { TableName = "Logs", AutoCreateSqlTable = true },
-        restrictedToMinimumLevel: Serilog.Events.LogEventLevel.Information) 
-    .CreateLogger();
 
-// Serilog'u kullanmaya baþla
+
+// Serilog'u kullanmaya baÅŸla
 builder.Host.UseSerilog();
 
 // AutoMapper
 builder.Services.AddAutoMapper(typeof(MappingProfile));
 
 
-
-
-
-// CORS politikasý tanýmla
+// CORS politikasÄ± tanÄ±mla
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAngularApp",
         policy =>
         {
-            policy.WithOrigins("http://localhost:4200")
+            policy.WithOrigins("https://localhost:4200")
                   .AllowAnyHeader()
                   .AllowAnyMethod();
         });
 });
 
 
-
-
-
-
 var app = builder.Build();
-
 
 // CORS'u middleware olarak ekle
 app.UseCors("AllowAngularApp");
 
-
-// Middleware Serilog için eklendi
+// Middleware Serilog iÃ§in eklendi
 app.UseSerilogRequestLogging();
 
-// Uygulama baþlarken veritabanýný otomatik oluþtur
+// Uygulama baÅŸlarken veritabanÄ±nÄ± otomatik oluÅŸtur
 using (var scope = app.Services.CreateScope())
 {
     var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
     db.Database.Migrate();
 }
+
+// Serilog yapÄ±landÄ±rmasÄ±
+Serilog.Log.Logger = new LoggerConfiguration()
+    .Enrich.FromLogContext()
+    .WriteTo.Console()
+    .WriteTo.MSSqlServer(
+        connectionString: connectionString,
+        sinkOptions: new MSSqlServerSinkOptions { TableName = "Logs", AutoCreateSqlTable = true },
+        restrictedToMinimumLevel: Serilog.Events.LogEventLevel.Information)
+    .CreateLogger();
+
 
 app.UseDefaultFiles();
 app.UseStaticFiles();
@@ -132,7 +155,10 @@ app.UseStaticFiles();
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwaggerUI(c =>
+    {
+        c.SwaggerEndpoint("/swagger/v1/swagger.json", "Your API V1");
+    });
 }
 
 app.UseHttpsRedirection();

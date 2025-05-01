@@ -1,0 +1,111 @@
+<div class="custom-modal modal-lg">
+    <div class="modal-header p-2">
+      <h4 class="ml-2 pt-2">Çalışan Ekle</h4>
+      <button class="btn btn-danger btn-circle mt-1" (click)="closeDialog()">
+        <i class="fa fa-times"></i>
+      </button>
+    </div>
+  </div>
+  
+  <div class="modal-content pt-1 pb-3">
+    <form class="col-lg-12" [formGroup]="myForm" (ngSubmit)="saveUser()">
+      <div class="row pt-3">
+        <section class="col-12 col-lg-12 example-section">
+          <mat-form-field appearance="fill" class="w-100">
+            <mat-label>Departman Seç</mat-label>
+            <mat-select formControlName="departmentId">
+              <mat-option *ngFor="let dept of departments" [value]="dept.id">
+                {{ dept.departmentName }}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="myForm.get('departmentId')?.hasError('required')">
+              Departman seçilmelidir.
+            </mat-error>
+          </mat-form-field>
+        </section>
+  
+        <mat-form-field class="col-6">
+          <mat-label>Adı</mat-label>
+          <input matInput placeholder="Adı" formControlName="name" />
+          <mat-error *ngIf="myForm.get('name')?.hasError('required')">
+            Adı boş geçilemez.
+          </mat-error>
+          <mat-error *ngIf="myForm.get('name')?.hasError('maxlength')">
+            En fazla 50 karakter olabilir.
+          </mat-error>
+        </mat-form-field>
+  
+        <mat-form-field class="col-6">
+          <mat-label>Soyadı</mat-label>
+          <input matInput placeholder="Soyadı" formControlName="surName" />
+          <mat-error *ngIf="myForm.get('surName')?.hasError('required')">
+            Soyadı boş geçilemez.
+          </mat-error>
+          <mat-error *ngIf="myForm.get('surName')?.hasError('maxlength')">
+            En fazla 50 karakter olabilir.
+          </mat-error>
+        </mat-form-field>
+  
+        <mat-form-field class="col-6">
+          <mat-label>Email</mat-label>
+          <input matInput placeholder="E Mail" formControlName="eMail" />
+          <mat-error *ngIf="myForm.get('eMail')?.hasError('required')">
+            Email boş geçilemez.
+          </mat-error>
+          <mat-error *ngIf="myForm.get('eMail')?.hasError('email')">
+            Geçerli bir email giriniz.
+          </mat-error>
+          <mat-error *ngIf="myForm.get('eMail')?.hasError('maxlength')">
+            En fazla 100 karakter olabilir.
+          </mat-error>
+        </mat-form-field>
+  
+        <mat-form-field class="col-6">
+          <mat-label>Telefon</mat-label>
+          <input matInput placeholder="Telefon" formControlName="phone" />
+          <mat-error *ngIf="myForm.get('phone')?.hasError('required')">
+            Telefon boş geçilemez.
+          </mat-error>
+          <mat-error *ngIf="myForm.get('phone')?.hasError('pattern')">
+            Sadece rakam giriniz (10-15 haneli).
+          </mat-error>
+          <mat-error *ngIf="myForm.get('phone')?.hasError('maxlength')">
+            En fazla 15 karakter olabilir.
+          </mat-error>
+        </mat-form-field>
+  
+        <mat-form-field class="col-12">
+          <mat-label>Adres</mat-label>
+          <textarea
+            matInput
+            placeholder="Adres"
+            formControlName="adress"
+            rows="3"
+          ></textarea>
+          <mat-error *ngIf="myForm.get('adress')?.hasError('required')">
+            Adres boş geçilemez.
+          </mat-error>
+          <mat-error *ngIf="myForm.get('adress')?.hasError('maxlength')">
+            En fazla 250 karakter olabilir.
+          </mat-error>
+        </mat-form-field>
+  
+        <div class="col-12">
+          <button
+            class="btn btn-warning btn-rounded ml-1 mr-1 mb-3 pt-3 pb-3 float-right"
+            type="button"
+            (click)="closeDialog()"
+          >
+            Vazgeç
+          </button>
+          <button
+            class="btn btn-e4 btn-rounded ml-1 mr-1 mb-3 pt-3 pb-3 float-right"
+            type="submit"
+          >
+            <i class="fa fa-user-plus mr-1"></i>Ekle
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+  

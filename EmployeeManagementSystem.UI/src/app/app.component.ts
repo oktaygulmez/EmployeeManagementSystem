@@ -1,35 +1,17 @@
-import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
-
-interface Department {
-  id: string;
-  departmentName: string;
-}
+import { Component } from '@angular/core';
+import { AuthManager } from './helper/authManager';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit {
-  public forecasts: Department[] = [];
+export class AppComponent {
 
-  constructor(private http: HttpClient) {}
+  constructor(private authManager: AuthManager) { }
 
-  ngOnInit() {
-    this.getForecasts();
+  isLoggedIn() {
+    return this.authManager.isLoggedIn();
   }
 
-  getForecasts() {
-    this.http.get<Department[]>('/api/Department').subscribe(
-      (result) => {
-        this.forecasts = result;
-      },
-      (error) => {
-        console.error(error);
-      }
-    );
-  }
-
-  title = 'employeemanagementsystem.client';
 }

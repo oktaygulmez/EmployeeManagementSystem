@@ -1,12 +1,11 @@
-﻿using EmployeeManagementSystem.Data.Entities;
-using EmployeeManagementSystem.MediatR.Department.Command;
+﻿using EmployeeManagementSystem.MediatR.Department.Command;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Serilog;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace EmployeeManagementSystem.API.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("api/[controller]")]
     public class DepartmentController : ControllerBase

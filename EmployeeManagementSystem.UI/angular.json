@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "employeemanagementsystem.client": {
+    "employeemanagementsystem.ui": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/employeemanagementsystem.client",
+            "outputPath": "dist/employeemanagementsystem.ui",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": [
@@ -25,6 +25,7 @@
               "src/assets"
             ],
             "styles": [
+              "src/custom-theme.scss",
               "src/styles.css"
             ],
             "scripts": []
@@ -60,10 +61,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "employeemanagementsystem.client:build:production"
+              "browserTarget": "employeemanagementsystem.ui:build:production"
             },
             "development": {
-              "browserTarget": "employeemanagementsystem.client:build:development"
+              "browserTarget": "employeemanagementsystem.ui:build:development"
             }
           },
           "defaultConfiguration": "development",
@@ -74,7 +75,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "employeemanagementsystem.client:build"
+            "browserTarget": "employeemanagementsystem.ui:build"
           }
         },
         "test": {
@@ -90,6 +91,7 @@
               "src/assets"
             ],
             "styles": [
+              "src/custom-theme.scss",
               "src/styles.css"
             ],
             "scripts": [],
